@@ -1,5 +1,7 @@
 package filesys;
 
+import exception.*;
+
 
 /**
  * Classe fichier 
@@ -15,14 +17,16 @@ public class Fichier extends FileSystem
      * 
      * @param taille donné au fichier
      * @param nom du fichier
+     * @exception TailleFichierException si la taille donnée est négative
+     * @exception FileSystemNullException si le nom donné au fichier est vide
      */
-    public Fichier(String nom, int taille) 
+    public Fichier(String nom, int taille) throws TailleFichierException, FileSystemNullException
     {
         super(nom,"file");
-       
+        if(nom.equals(null)) throw new FileSystemNullException();
         if(taille >= 0)
         	this.taille = taille;
-        
+        else throw new TailleFichierException();
     }
  
     /** 
