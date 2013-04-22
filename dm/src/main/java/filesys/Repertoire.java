@@ -8,8 +8,7 @@ import exception.*;
  * @author LUCIANI Arnaud VASSOUT Vincent
  * @version 16/04/13
  */
-public class Repertoire extends FileSystem
-{
+public class Repertoire extends FileSystem{
     
     private static final int NB_MAX_FILE_SYST = 10;
     private static int nbRep = 0;
@@ -24,10 +23,9 @@ public class Repertoire extends FileSystem
      * @param nom du Repertoire
      * @exception FileSystemNullException si le nom est vide
      */
-    public Repertoire(String nom) throws FileSystemNullException
-    {
+    public Repertoire(String nom) throws FileSystemNullException{
         super(nom,"directory");
-        if(nom.equals(null)) throw new FileSystemNullException();
+        if(nom.equals("")) throw new FileSystemNullException();
         liste = new FileSystem[NB_MAX_FILE_SYST];
         nbFile = 0;
     }
@@ -40,8 +38,7 @@ public class Repertoire extends FileSystem
      * @exception RepertoirePleinException si Repertoire plein
      * @return boolean vrai si ajout possible faux sinon
      */
-    public boolean ajouterFileSystem(FileSystem file) throws RepertoirePleinException
-    {
+    public boolean ajouterFileSystem(FileSystem file) throws RepertoirePleinException{
     	if(nbFile >= NB_MAX_FILE_SYST) throw new RepertoirePleinException();
     	else{
     		if(this.notInDirectory(file) && this.notAlreadyExist(file)) {
@@ -58,11 +55,9 @@ public class Repertoire extends FileSystem
      * 
      * @return taille de tous les éléments du repertoire
      */
-    public int taille()
-    {
+    public int taille(){
         int sumTaille = 0;
-        for(int i=0; i < nbFile; ++i)
-        {
+        for(int i=0; i < nbFile; ++i){
             sumTaille += liste[i].taille();
         }
         return sumTaille;
@@ -80,8 +75,7 @@ public class Repertoire extends FileSystem
      *Permet de récupérer le nom du repertoire
      *@return nom du repertoire 
      */
-    public String get_nom()
-    {
+    public String get_nom(){
     	return super.get_nom();
     }
     
@@ -89,8 +83,7 @@ public class Repertoire extends FileSystem
      *Permet de récupérer le type: directory
      *@return type "directory" 
      */
-    public String get_type()
-    {
+    public String get_type(){
     	return "directory";
     }
     
@@ -98,8 +91,7 @@ public class Repertoire extends FileSystem
      *Permet de récupérer le nombre d'éléments du repertoire
      *@return nombre éléments  
      */
-    public int get_nbFile()
-    {
+    public int get_nbFile(){
     	return nbFile;
     }
     /**
@@ -114,20 +106,15 @@ public class Repertoire extends FileSystem
     	boolean isNotIn = true;
     	int i =0;
     	//Vérifie que le file est repertoire
-    	if(file.get_type().equals("directory"))
-    	{
-    		
+    	if(file.get_type().equals("directory")){
     		//le file est un repertoire qui a même nom.
     		if (this.get_nom().equals(file.get_nom()))
     			return false;
-    		
     		liste=((Repertoire) file).get_liste();
-    		while(i < ((Repertoire) file).get_nbFile() && isNotIn)
-    		{
+    		while(i < ((Repertoire) file).get_nbFile() && isNotIn){
     			isNotIn = this.notInDirectory(liste[i]);
     			++i;
-    		}   		
-    	
+    		}
     	}
     	return isNotIn;
     }
@@ -139,14 +126,11 @@ public class Repertoire extends FileSystem
     public boolean notAlreadyExist(FileSystem file){
     	boolean notExist = true;
     	int i=0;
-    	
-    	while( i < this.nbFile && notExist)
-    	{
+    	while( i < this.nbFile && notExist){
     		notExist = !(this.liste[i].get_nom()).equals(file.get_nom());
     		++i;
     	}
     	return notExist;
-    	
     }
 }
 

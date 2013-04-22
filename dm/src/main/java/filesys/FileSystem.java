@@ -7,17 +7,16 @@ package filesys;
  * @author LUCIANI Arnaud VASSOUT Vincent
  * @version 16/04/13
  */
-public abstract class FileSystem
-{
-    // instance variables - replace the example below with your own
+public abstract class FileSystem{
     private String nom;
     private String type;
 
     /**
      * Constructeur d'objet FileSystem
+     * @param nom du FileSystem 
+     * @param type du FileSystem (file, directory)
      */
-    public FileSystem(String nom, String type)
-    {
+    public FileSystem(String nom, String type){
         this.nom = nom;
         this.type = type;
     }
@@ -35,8 +34,7 @@ public abstract class FileSystem
      * Permet de connaître le nom du FileSystem(file,directory)
      * @return nom du FileSystem
      */
-    public String get_nom()
-    {
+    public String get_nom(){
     	return nom;
     }
 

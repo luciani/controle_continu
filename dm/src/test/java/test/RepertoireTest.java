@@ -15,30 +15,34 @@ import filesys.*;
  */
 public class RepertoireTest {
 	
+	/**
+	 * Teste la creation d'un repertoire.
+	 * Le nom ne doit pas etre vide
+	 */
 	@Test
-	@Before
-	public void TestRepertoire()
-    {
+	public void TestRepertoire(){
 		try{
 			Repertoire r1 = new Repertoire("rep1");
 			assertNotNull(r1);
 			assertEquals(r1.get_nom(), "rep1");
-		//	Repertoire r2 = new Repertoire();
+			Repertoire r2 = new Repertoire("");
 		}
 		catch(FileSystemNullException e){
 			System.out.println(e.getMessage());
 		}
-		
     }
-     
     
+	/**
+	 * Teste l'ajout dans un repertoire.
+	 * Le repertoire ne doit pas etre plein, ne doit pas se contenir lui même
+	 * ni etre contenu dans l'un de ses sous repertoire 
+	 */
     @Test
-    public void TestAjouterFileSystem()
-    {
+    public void TestAjouterFileSystem(){
     	try{
 	    	Repertoire r1 = new Repertoire("rep1");
 	    	Repertoire r2 = new Repertoire("rep2");
-	    	Fichier f1 = new Fichier("fic1",10);
+	    	Fichier f1 = new Fichier("fic1", 10);
 	    	
 	    	assertTrue(r1.ajouterFileSystem(f1));
 	    	assertFalse(r1.ajouterFileSystem(r1));
@@ -53,16 +57,17 @@ public class RepertoireTest {
     	catch(TailleFichierException eFic){
     		System.out.println(eFic.getMessage());
     	}
-    	
     }
     
+    /**
+     * Teste le calcul de la taille d'un repertoire
+     */
     @Test
-    public void taille()
-    {
+    public void taille(){
     	try{
 	    	Repertoire r1 = new Repertoire("rep1");
-	    	Fichier f1 = new Fichier("fic1",10);
-	    	Fichier f2 = new Fichier("fic2",30);
+	    	Fichier f1 = new Fichier("fic1", 10);
+	    	Fichier f2 = new Fichier("fic2", 30);
 	    	Repertoire r2 = new Repertoire("rep2");
 	    	
 	    	r1.ajouterFileSystem(f1);
@@ -82,6 +87,9 @@ public class RepertoireTest {
     	}
     }
     
+    /**
+     * Teste si un repertoire n'est pas dans le repertoire specifie
+     */
     @Test
     public void TestnotInDirectory(){
     	try{
@@ -101,15 +109,19 @@ public class RepertoireTest {
     	}
     }
     
+    /**
+     * Teste si le repertoire n'est pas dans lui meme ou
+     * si il n'est pas dans un de ses sous repertoire
+     */
     @Test
     public void notAlreadyExist(){
     	try{
 	    	Repertoire r1 = new Repertoire("rep1");
 	    	Repertoire r2 = new Repertoire("f2");
 	    	Repertoire r3 = new Repertoire("f1");
-	    	Fichier f1 = new Fichier("f1",10);
-	    	Fichier f2 = new Fichier("f2",30);
-	    	Fichier f3 = new Fichier("f3",50);
+	    	Fichier f1 = new Fichier("f1", 10);
+	    	Fichier f2 = new Fichier("f2", 30);
+	    	Fichier f3 = new Fichier("f3", 50);
 	    	
 	    	r1.ajouterFileSystem(r2);
 	    	r1.ajouterFileSystem(f1);
